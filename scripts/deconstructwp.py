@@ -17,8 +17,8 @@
 #  A subdirectory for each content type containing one
 #  file for each node containing its text.
 #
-# Tested with Python 3.3.2
-# April 24, 2016
+# Tested with Python 3.4.3
+# April 25, 2016
 #
 # Author: Dick Johnson
 #
@@ -36,6 +36,7 @@ import urllib.error
 import urllib.parse
 from bs4 import BeautifulSoup
 from PIL import Image
+from xml.etree.ElementTree import *
 
 # file object for the web site error log file
 log_fileobj = None
@@ -508,6 +509,9 @@ def filterText(s):
 # PROCESSING INITIALIZATION SECTION
 ###################################
 
+# name of the options file
+options_file = "options.xml"
+
 # set debugging control
 setdebug(False)
 # only process a single node, if true
@@ -516,14 +520,63 @@ testmode = False
 # set the CMS to WordPress
 set_cms("WordPress")
 
-# set retry/sleep values
-set_maxretry(5)
-set_retrysleep(5)
-set_maxretry(1)
-set_retrysleep(1)
-
 # unique file identifier
 file_ident = 0
+
+# get runtime options from the options XML file
+
+tree = ElementTree()
+try:
+    root = tree.parse(options_file)
+except:
+    print("Error, could not parse",options_file)
+    exit(0)
+
+if not root.tag == "options":
+    print("Error,",options_file,"is not recognized")
+    exit(0)
+
+# set defaults
+set_maxretry(5)
+set_retrysleep(5)
+WordPressurl = None
+user = None
+password = None
+
+# get parameter values from the options file
+for e in root.iter():
+    if not e.text == None:
+      if e.tag == "url":
+        WordPressurl = e.text
+      elif e.tag == "user":
+        user = e.text
+      elif e.tag == "password":
+        password = e.text
+      elif e.tag == "outdir":
+        outdir = e.text
+      elif e.tag == "debug":
+        if e.text[0] == "Y":
+          setdebug(True)
+      elif e.tag == "testmode":
+        if e.text[0] == "Y":
+          testmode = True
+      elif e.tag == "maxretry":
+          n = int(e.text)
+          set_maxretry(n)
+      elif e.tag == "retrysleep":
+          n = int(e.text)
+          set_retrysleep(n)
+
+# check for stuff we need missing
+if WordPressurl == None:
+    print("No url!")
+    exit(0)
+if user == None:
+    print("No user!")
+    exit(0)
+if password == None:
+    print("No password!")
+    exit(0)
 
 #
 # signon to the site for XML-RPC
@@ -531,20 +584,15 @@ file_ident = 0
 print("deconstructwp utility begins")
 print()
 
-# set the site URL
-WordPressurl = "http://local.sample.com/"
-
 # set the url to be used for XML-RPC calls
-WordPress = WordPressurl+"xmlrpc.php"
+WordPress = WordPressurl+"/xmlrpc.php"
 set_cms_url(WordPress)
 
 # calculate the relative base to the URL
 set_base_url(baseURL(WordPressurl))
 
 # set the site user and password
-user="admin"
 set_user(user)
-password = "password"
 set_password(password)
 
 print("WordPress URL:",WordPressurl)
@@ -556,7 +604,6 @@ print()
 
 # initial setup of the output directory
 # set output directory
-outdir = "deconstruct"
 EmptyDir(outdir)
 # create a directory for the images
 imagedir = outdir+os.sep+"images"
@@ -591,7 +638,9 @@ set_proxy(proxy)
 
 # read in all the posts/pages and make the category list
 Posts = getWPposts('post')
+print("there are",len(Posts),"posts")
 Pages = getWPposts('page')
+print("there are",len(Pages),"pages")
 for pg in Pages:
     Posts.append(pg)
 category_list=[]
