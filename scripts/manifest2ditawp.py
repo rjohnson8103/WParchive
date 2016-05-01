@@ -5,8 +5,8 @@
 # A script that processes newsfromnan posts mined by
 # deconstructwp.py and creates dita source files from them.
 # 
-# Tested with Python 3.3.2
-# April 24, 2016
+# Tested with Python 3.4.3
+# May 1, 2016
 #
 # Author: Dick Johnson
 #
@@ -69,7 +69,7 @@ splash_page_image = "common/processing_files/images/splash_page_image.jpg"
 #
 def webErrorLog(*s):
     global log_fileobj
-    log_file = "newsnan2ditaError.log"
+    log_file = "manifest2ditaError.log"
     
     if debugMode():
         print("webErrorLog:",s)
@@ -195,7 +195,7 @@ def actualPath(fp):
 def logText(s):
     global logfp
 
-    logfile = "newsnan2dita.log"
+    logfile = "manifest2dita.log"
 
     if logfp==None:
         omode = "w"
@@ -466,7 +466,7 @@ def html2dita(e,dfile,id):
         if ee.tag=="h2":
             # h2 starts a new section with a title
             section = Element("section")
-            sectionp= section
+            sectionp = section
             stitle = SubElement(section,"title")
             stitle.text = ee.text
             nsect = nsect+1
@@ -474,7 +474,8 @@ def html2dita(e,dfile,id):
             slist.append(section)
         elif ee.tag=="h3":
             # h3 starts a sectiondiv within the current section
-            sectiondiv = SubElement(section,"sectiondiv")
+            sectiondiv = ee
+            ee.tag = "sectiondiv"
             # fake up a title line, since sectiondiv does not allow a title subelement
             sectiondivp = SubElement(sectiondiv,"p")
             sectiondivpb = SubElement(sectiondivp,"b")
@@ -699,12 +700,12 @@ testmode = False
 #
 # signon
 #
-print("newsnan2ditawp utility begins")
+print("manifest2ditawp utility begins")
 print()
 
 # initial setup of the output directory
 # set output directory
-outdir = "newsnan.dita"
+outdir = "manifest.dita"
 print("empty output directory",outdir)
 EmptyDir(outdir)
 
@@ -1061,7 +1062,7 @@ for ctype in ctypes:
 print()
 # write out the book map
 outstr = bookdoctype+tostring(bookroot).decode()
-outmappath = outdir+os.sep+"NewsFromNan_pdf.ditamap"
+outmappath = outdir+os.sep+"WParchive_pdf.ditamap"
 fp = open(outmappath,"w")
 print("writing",outmappath)
 fp.write(outstr)
@@ -1077,7 +1078,7 @@ fp.close()
 print()
 webErrorLogClose()
 
-print("newsnan2ditawp utility ends")
+print("manifest2ditawp utility ends")
 
 
 

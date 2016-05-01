@@ -6,8 +6,8 @@
 # Functions defined here are mostly not dependent on a particular
 # Web CMS.
 #
-# Tested with Python 3.2.2
-# April 24, 2016
+# Tested with Python 3.4.3
+# April 27, 2016
 #
 # Author: Dick Johnson
 #

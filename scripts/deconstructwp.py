@@ -18,7 +18,7 @@
 #  file for each node containing its text.
 #
 # Tested with Python 3.4.3
-# April 25, 2016
+# May 1, 2016
 #
 # Author: Dick Johnson
 #
@@ -774,11 +774,27 @@ for p in Posts:
     fpath = fpath.replace("-","_")
     # get the raw node text
     ftext = p['post_content']
+        
     # try to make html out of it
-    soup = BeautifulSoup(ftext)
+    soup = BeautifulSoup(ftext,"html.parser")
     stext = soup.prettify()
-    # wrap the text in an outer root element
-    stext = "<div>"+stext+"</div>"
+    
+    try:
+        # do we have xhtml with a root?
+        roothtml = XML(stext)
+        print(roothtml.tag)
+        # replace <html><body> with <div>
+        if roothtml.tag == "html":
+            bodye = roothtml.find("body")
+            if not bodye == None:
+                bodye.tag = "div"
+                stext = str(tostring(bodye,encoding="unicode"))
+                                
+    except:
+        print("Note, could not parse html in:",fpath)
+        # wrap the text in an outer root element
+        stext = "<div>"+stext+"</div>"
+    
 
     # expand any galleries to image references
     if SGALLERY in stext:
