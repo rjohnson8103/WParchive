@@ -1,0 +1,11 @@
+<options>
+	<url>http://local.newsfromnan.com</url>
+	<user>admin</user>
+	<password>9TM^%SHYOmZfMTd$4sHrY^9q</password>
+	<outdir>..\deconstruct</outdir>
+	<debug>N</debug>
+	<testmode>N</testmode>
+	<maxretry>1</maxretry>
+	<retrysleep>1</retrysleep>
+	<xx/>
+</options>

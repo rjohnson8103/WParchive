@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "../dtd/concept.dtd">
+<concept id="splashpage_narchive">
+	<title>WordPress site archive</title>
+	<shortdesc id="shortdesc"/>
+	<prolog>
+		<author type="creator">Richard Johnson</author>
+		<author type="contributor">Joe User</author>
+		<critdates>
+			<created date="2016-May-07"/>
+			<revised modified="2016-May-07"/>
+		</critdates>
+		<metadata>
+			<keywords/>
+		</metadata>
+	</prolog>
+	<conbody>
+		<section>
+			<p>Richard H. (Dick) Johnson</p>
+			<p>2016 Edition</p>
+			<p><image href="images/splash_page_image.jpg" placement="break"/></p>
+		</section>
+	</conbody>
+</concept>

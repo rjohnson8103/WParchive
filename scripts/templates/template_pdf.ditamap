@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE bookmap PUBLIC "-//OASIS//DTD DITA BookMap//EN" "dtd/bookmap.dtd">
+<bookmap id="NewsFromNan_pdf">
+	<booktitle>
+		<mainbooktitle>WordPress Archive Posts<image href="images/splash_page_image.jpg" placement="break"/></mainbooktitle>
+		<booktitlealt>First Edition - May 2016</booktitlealt>
+	</booktitle>
+	<frontmatter>
+		<booklists>
+			<toc/>
+			<figurelist/>
+			<tablelist/>
+		</booklists>
+	</frontmatter>
+	
+	<backmatter>
+		<booklists>
+			<indexlist/>
+		</booklists>
+	</backmatter>
+</bookmap>

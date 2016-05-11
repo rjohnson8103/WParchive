@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "../dtd/concept.dtd">
+<concept id="template">
+	<title/>
+	<prolog>
+		<author type="creator">Anna van Raaphorst</author>
+		<author type="contributor">Richard Johnson</author>
+		<publisher>Richard Johnson</publisher>
+		<copyright>
+			<copyryear year="2014"/>
+			<copyrholder>Richard Johnson</copyrholder>
+		</copyright>
+		<critdates>
+			<created date="2014-Aug-23"/>
+			<revised modified="2014-Sep-03"/>
+		</critdates>
+		<metadata>
+			<keywords> </keywords>
+		</metadata>
+	</prolog>
+	<conbody> </conbody>
+</concept>
