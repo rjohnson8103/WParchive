@@ -6,7 +6,7 @@
 # deconstructwp.py and creates dita source files from them.
 # 
 # Tested with Python 3.4.3
-# May 1, 2016
+# May 7, 2016
 #
 # Author: Dick Johnson
 #
@@ -36,7 +36,7 @@ longtitle = False
 # how to sort the topics in the output map
 STITLE = 1
 SCHRON = 2
-sorttype = STITLE
+sorttype = SCHRON
 
 if sorttype == SCHRON:
     NTYPE = 0
@@ -721,7 +721,7 @@ template = "templates/template.dita"
 template_map = "templates/template_pdf.ditamap"
 templatew_map = "templates/template_web.ditamap"
 template_dir_map = "templates/template_dir.ditamap"
-splash_page = "common/processing_files/splash_pages/splashpage_newsfromnanarchive.dita"
+splash_page = "common/processing_files/splash_pages/splashpage_archive.dita"
 
 total_nodes = 0
 image_count = 0
@@ -1070,7 +1070,7 @@ fp.close()
 
 # write out the web map
 outstr = mapdoctype+tostring(maproot).decode()
-outmappath = outdir+os.sep+"NewsFromNan_web.ditamap"
+outmappath = outdir+os.sep+"WParchive_web.ditamap"
 fp = open(outmappath,"w")
 print("writing",outmappath)
 fp.write(outstr)
